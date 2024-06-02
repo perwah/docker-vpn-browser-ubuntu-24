@@ -11,7 +11,7 @@ else
 fi
 
 # revoke sudo privileges after OpenVPN start
-sudo rm /etc/sudoers.d/user
+#sudo rm /etc/sudoers.d/ubuntu
 
 if [ ! -z ${ASSERT_COUNTRY+x} ]; then
   IP_COUNTRY=`curl ifconfig.co/country`
@@ -27,7 +27,8 @@ fi
 # If no profile ...
 if [ $COMMAND == "firefox" ]; then
   # create the default Firefox profile and put some settings there
-  firefox &
+  COMMAND="$HOME/firefox/firefox"
+  $COMMAND &
   FIREFOX_PID=$!
   # Since some recent Firefox version, calling CreateProfile and copying
   # user.js stopped working on the first use for reasons I could not find on
@@ -42,6 +43,15 @@ if [ $COMMAND == "firefox" ]; then
   echo "killing Firefox and copying settings"
   kill $FIREFOX_PID
   mv $HOME/user.js `find $HOME/.mozilla/firefox -maxdepth 1 -type d | grep .default-release`
+
+  if [ -e "$HOME/tmp/pipewire-0" ]; then
+    # Start audio
+    # We assume host is running pipewire with a unix socket mapped in by -v /run/user/1000/pipewire-0:$USERHOME/tmp/pipewire-0
+    echo "Pipewire socket found at $HOME/tmp/pipewire-0, starting audio."
+    pipewire-pulse &
+  else
+    echo "Pipewire socket not found at $HOME/tmp/pipewire-0, not starting audio."
+  fi
 fi
 
 $COMMAND
