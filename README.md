@@ -1,4 +1,5 @@
 # Docker VPN browser
+Fork of https://github.com/oseiskar/docker-vpn-browser
 
 Run Firefox and an OpenVPN client inside a Docker container. Firefox starts
 without any cookies, history or such, and has audio on Ubuntu 24.04.
