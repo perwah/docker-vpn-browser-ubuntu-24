@@ -1,7 +1,7 @@
 FROM ubuntu:noble
 
 RUN apt-get update && \
-  apt-get install -y curl sudo openvpn transmission pipewire libgtk-3-bin && \
+  apt-get install -y curl sudo openvpn transmission pipewire libgtk-3-bin ubuntu-restricted-extras && \
   rm -rf /var/lib/apt/lists/*
 
 # Enable sudo (needed by openvpn, unfortunately)
