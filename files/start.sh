@@ -11,7 +11,7 @@ else
 fi
 
 # revoke sudo privileges after OpenVPN start
-#sudo rm /etc/sudoers.d/ubuntu
+sudo rm /etc/sudoers.d/ubuntu
 
 if [ ! -z ${ASSERT_COUNTRY+x} ]; then
   IP_COUNTRY=`curl ifconfig.co/country`
