@@ -9,7 +9,7 @@ RUN echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && \
   chmod 0440 /etc/sudoers.d/ubuntu
 
 USER ubuntu
-ENV HOME /home/ubuntu
+ENV HOME=/home/ubuntu
 
 ADD downloads/firefox*.bz2 $HOME
 RUN mkdir $HOME/tmp
@@ -20,4 +20,4 @@ COPY files/start.sh $HOME
 COPY files/start-openvpn-blocking.sh $HOME
 
 ENTRYPOINT ["/bin/bash", "/home/ubuntu/start.sh"]
-CMD ['firefox']
+CMD ["firefox"]

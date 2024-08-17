@@ -3,6 +3,8 @@ set -e
 COMMAND="$1"
 echo "$COMMAND"
 
+sudo chown ubuntu:ubuntu $HOME/Downloads
+
 OPENVPN_CONF='/etc/openvpn/openvpn.conf'
 if [ -f "$OPENVPN_CONF" ]; then
   "$HOME/start-openvpn-blocking.sh" "$OPENVPN_CONF"
